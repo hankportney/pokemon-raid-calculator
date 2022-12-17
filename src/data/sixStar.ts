@@ -14,14 +14,14 @@ const sixStar = [
 		additional_moves: ["Bulk Up", "Screech"],
 	},
 	{
-		name: "Tauros",
+		name: "Tauros [Blaze Breed]",
 		tera_type: "Random",
 		ability: "Hidden Possible",
 		moves: ["Flare Blitz", "Close Combat", "Flamethrower", "Headbutt"],
 		additional_moves: ["Sunny Day", "Bulk Up"],
 	},
 	{
-		name: "Tauros",
+		name: "Tauros [Aqua Breed]",
 		tera_type: "Random",
 		ability: "Hidden Possible",
 		moves: ["Wave Crash", "Close Combat", "Surf", "Headbutt"],
