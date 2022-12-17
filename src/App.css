@@ -1,38 +1,108 @@
-.App {
-  text-align: center;
+.input-section {
+	display: flex;
+	flex-direction: column;
+	align-self: stretch;
+	padding: 1.25rem;
+	align-items: center;
+	gap: 1rem;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.input-section .input-container {
+	display: flex;
+	flex-direction: column;
+	gap: 0.25rem;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.input-section > * {
+	max-width: 25rem;
+	width: 100%;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.input-section label.input-label {
+	font-size: 1rem;
+	font-weight: 700;
+	line-height: 1.5;
 }
 
-.App-link {
-  color: #61dafb;
+select {
+	webkit-appearance: none;
+	moz-appearance: none;
+	appearance: none;
+	border: 0.125rem solid;
+	border-color: black;
+	border-radius: 0.25rem;
+	height: 2.5rem;
+	padding-left: 0.75rem;
+	padding-right: 0.75rem;
+	outline: none;
+	box-shadow: none;
+	font-size: 1rem;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+select:focus-visible {
+	border-color: blue;
+	box-shadow: 0px 0px 0px 0.0625rem blue;
+}
+
+.tera-type-input {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	padding: 0.5rem;
+	border: 0.125rem solid;
+	border-radius: 0.25rem;
+	border-color: black;
+}
+
+.tera-type-input:focus-within {
+	border-color: blue;
+	box-shadow: 0px 0px 0px 0.0625rem blue;
+}
+
+.tera-type-input label {
+	display: contents;
+}
+
+.tera-type-input label input[type="radio"] {
+	webkit-appearance: none;
+	moz-appearance: none;
+	appearance: none;
+	/* For iOS < 15 to remove gradient background */
+	background-color: #fff;
+	/* Not removed via appearance */
+	margin: 0;
+	/* So it doesn't interfere with flex grid */
+	position: absolute;
+}
+
+.tera-type-input label span {
+	height: fit-content;
+	width: 4rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	transition-duration: 100ms;
+	cursor: pointer;
+	padding-bottom: 0.75rem;
+	font-size: 13px;
+	flex-grow: 1;
+	border: 0.125rem solid;
+	border-color: transparent;
+}
+
+.tera-type-input label input[type="radio"]:not(:checked) + span:hover {
+	background: rgba(0, 0, 0, 0.05);
+}
+
+.tera-type-input label span img {
+	height: 4rem;
+	width: 100%;
+	pointer-events: none;
+	object-fit: contain;
+}
+
+.tera-type-input label input[type="radio"]:checked + span {
+	/* background: rgba(0, 0, 255, 0.1); */
+	font-weight: bold;
+	border-color: black;
 }
