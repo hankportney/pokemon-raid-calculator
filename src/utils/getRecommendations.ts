@@ -1,5 +1,5 @@
 import PokeAPI, { IMove, IType } from "pokeapi-typescript";
-import { RaidData, StarRating, TeraType } from "../types";
+import { PokemonRenderDetails, RaidData, TeraType } from "../types";
 import sanitizeMove from "./sanitizeMove";
 import sanitizedType from "./sanitizeType";
 
@@ -7,23 +7,25 @@ import sanitizedType from "./sanitizeType";
  * A function that retrieves raid pokemon data and generates recommendations
  * from a raid star rating, pokemon species, and tera type.
  * @param data
- * @param starRating
  * @param selectedSpecies
  * @param teraType
  */
 const getRecommendations = async (
 	data: RaidData[],
-	starRating: StarRating,
 	selectedSpecies: string,
 	teraType: TeraType
-) => {
+): Promise<{
+	raid_pokemon: PokemonRenderDetails;
+}> => {
 	// Fetch selected pokemon (using selectedSpecies, in state) from PokeAPI
-	const { types, sprites } = await PokeAPI.Pokemon.fetch(selectedSpecies);
+	const { types, sprites, abilities, stats } = await PokeAPI.Pokemon.fetch(
+		selectedSpecies
+	);
 
 	// GET ADDITIONAL TERA TYPE DETAILS -------------------------------------------------- //
 
 	const teraTypeDetails = await PokeAPI.Type.fetch(teraType);
-	const sanitizedTeraTypeDetails = sanitizedType(teraTypeDetails);
+	const sanitizedTeraType = sanitizedType(teraTypeDetails);
 
 	// ---------------------------------------------------------------------------------- //
 
@@ -70,13 +72,14 @@ const getRecommendations = async (
 
 	// ---------------------------------------------------------------------------------- //
 
-	console.log("Sanitized tera type: ", sanitizedTeraTypeDetails);
-	console.log("Sanitized types: ", sanitizedTypes);
-	console.log("Sanitized moves: ", sanitizedMoves);
-	console.log("sprite front default ", sprites.front_default);
-
 	return {
-		types: sanitizedTypes,
+		raid_pokemon: {
+			name: selectedSpecies,
+			sprite: sprites.front_default,
+			base_types: sanitizedTypes,
+			tera_type: sanitizedTeraType,
+			moves: sanitizedMoves,
+		},
 	};
 };
 

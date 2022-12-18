@@ -4,6 +4,7 @@ import {
 	IMoveMetaData,
 	IMoveStatChange,
 	IMoveTarget,
+	IPokemonSprites,
 	IStat,
 	IType,
 	IVerboseEffect,
@@ -70,4 +71,12 @@ export interface SanitizedType {
 	damage_relations: CleanDamageRelations;
 	damage_class: IMove["damage_class"]["name"];
 	name: IType["name"];
+}
+
+export interface PokemonRenderDetails {
+	name: string;
+	sprite: IPokemonSprites["front_default"];
+	base_types: SanitizedType[];
+	tera_type: SanitizedType;
+	moves: SanitizedMove[];
 }
