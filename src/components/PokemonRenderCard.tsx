@@ -34,6 +34,35 @@ const PokemonRenderCard: FC<PokemonRenderCardProps> = ({ pokemon }) => {
 				alt={`Sprite of ${pokemon.name}`}
 				className="sprite"
 			/>
+
+			<table className="move-table">
+				<thead>
+					<tr>
+						<th>Move</th>
+						<th>Type</th>
+						<th>Power</th>
+						<th>Accuracy</th>
+						<th>PP</th>
+					</tr>
+				</thead>
+				<tbody>
+					{pokemon.moves.map((move) => (
+						<tr>
+							<td>{move.name}</td>
+							<td>
+								<img
+									src={`/typeBadges/${move.type}.png`}
+									alt={`Pokemon move type: ${move.type}`}
+									className="move-type-badge"
+								/>
+							</td>
+							<td>{move.power}</td>
+							<td>{move.accuracy}</td>
+							<td>{move.pp}</td>
+						</tr>
+					))}
+				</tbody>
+			</table>
 		</article>
 	);
 };

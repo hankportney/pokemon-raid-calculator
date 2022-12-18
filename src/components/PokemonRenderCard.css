@@ -53,3 +53,13 @@
 .pokemon-card .badge-group .type-badge {
 	height: 1.375rem;
 }
+
+.pokemon-card .move-table th {
+	text-align: left;
+}
+
+.pokemon-card .move-table .move-type-badge {
+	height: 1.5rem;
+	width: 3.25rem;
+	object-fit: contain;
+}
