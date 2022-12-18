@@ -1,4 +1,4 @@
-import PokeAPI from "pokeapi-typescript";
+import PokeAPI, { IMove } from "pokeapi-typescript";
 import { useState } from "react";
 import "./App.css";
 import SpeciesInput from "./components/SpeciesInput";
@@ -25,7 +25,7 @@ function App() {
 		);
 
 		// Use raid move list from JSON to fetch array of raid move info from PokeAPI
-		const moves = await Promise.all(
+		const movePromises = await Promise.allSettled(
 			pokemonRaidDetails?.moves.map((move) =>
 				PokeAPI.Move.fetch(move.replace(" ", "-")).then((result) => {
 					return result;
@@ -33,7 +33,12 @@ function App() {
 			) || []
 		);
 
-		console.log("Resolved moves: ", moves);
+		// Clean up the move promises to only include those that resolved successfully, and extract their data.
+		const sanitizedMoves = movePromises
+			.filter((el) => el.status === "fulfilled")
+			.map((el) => (el as PromiseFulfilledResult<IMove>).value);
+
+		console.log("Sanitized moves: ", sanitizedMoves);
 	};
 
 	return (
