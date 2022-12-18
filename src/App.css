@@ -7,21 +7,33 @@
 	gap: 1rem;
 }
 
-.input-section .input-container {
-	display: flex;
-	flex-direction: column;
-	gap: 0.25rem;
-}
-
 .input-section > * {
 	max-width: 25rem;
 	width: 100%;
 }
 
-.input-section label.input-label {
-	font-size: 1rem;
+fieldset {
+	display: flex;
+	flex-direction: column;
+	gap: 0.25rem;
+	border-style: groove;
+	border: 2px solid black;
+	border-radius: 0.125rem;
+}
+
+fieldset legend {
+	font-size: 0.9375rem;
 	font-weight: 700;
 	line-height: 1.5;
+	width: fit-content;
+	background: white;
+	padding-left: 0.5rem;
+	padding-right: 0.5rem;
+}
+
+fieldset:focus-within {
+	border-color: blue;
+	box-shadow: 0px 0px 0px 0.0625rem blue;
 }
 
 select {
@@ -48,15 +60,6 @@ select:focus-visible {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
-	padding: 0.5rem;
-	border: 0.125rem solid;
-	border-radius: 0.25rem;
-	border-color: black;
-}
-
-.tera-type-input:focus-within {
-	border-color: blue;
-	box-shadow: 0px 0px 0px 0.0625rem blue;
 }
 
 .tera-type-input label {
