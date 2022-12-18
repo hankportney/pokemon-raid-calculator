@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./App.css";
+import PokemonRenderCard from "./components/PokemonRenderCard";
 import SpeciesInput from "./components/SpeciesInput";
 import StarRatingInput from "./components/StarRatingInput";
 import TeraTypeInput from "./components/TeraTypeInput";
@@ -31,15 +32,23 @@ function App() {
 
 	return (
 		<>
-			<section className="input-section">
-				<StarRatingInput value={starRating} onChange={setStarRating} />
-				<SpeciesInput
-					value={selectedSpecies}
-					onChange={setSelectedSpecies}
-					data={relevantData}
-				/>
-				<TeraTypeInput value={teraType} onChange={setTeraType} />
-			</section>
+			<div style={{ display: "flex", flexDirection: "row" }}>
+				<section className="input-section">
+					<StarRatingInput
+						value={starRating}
+						onChange={setStarRating}
+					/>
+					<SpeciesInput
+						value={selectedSpecies}
+						onChange={setSelectedSpecies}
+						data={relevantData}
+					/>
+					<TeraTypeInput value={teraType} onChange={setTeraType} />
+				</section>
+				{raidPokemon != undefined && (
+					<PokemonRenderCard pokemon={raidPokemon} />
+				)}
+			</div>
 		</>
 	);
 }
