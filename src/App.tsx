@@ -2,29 +2,25 @@ import { useState } from "react";
 import "./App.css";
 import SpeciesInput from "./components/SpeciesInput";
 import StarRatingInput from "./components/StarRatingInput";
-import TeraTypeInput from "./components/TeraTypeInput";
+import TeraTypeInput, { TeraType } from "./components/TeraTypeInput";
 import sixStar from "./data/sixStar";
 
 function App() {
-	const getStarRaidData = () => {};
-
-	const [selectedSpecies, setSelectedSpecies] = useState<string>("cheese");
+	const [starRating, setStarRating] = useState<number>(6);
+	const [selectedSpecies, setSelectedSpecies] = useState<string>("Tauros");
+	const [teraType, setTeraType] = useState<TeraType | undefined>();
 
 	return (
 		<>
-			<header></header>
-
 			<section className="input-section">
-				<StarRatingInput />
+				<StarRatingInput value={starRating} onChange={setStarRating} />
 				<SpeciesInput
 					value={selectedSpecies}
 					onChange={setSelectedSpecies}
-					data={sixStar}
+					data={starRating === 6 ? sixStar : []}
 				/>
-				<TeraTypeInput />
-				<button onClick={getStarRaidData}>Get the raid info</button>
+				<TeraTypeInput value={teraType} onChange={setTeraType} />
 			</section>
-			<section>hello</section>
 		</>
 	);
 }
