@@ -40,7 +40,7 @@ const sixStar: RaidData[] = [
 		name: "Ditto",
 		tera_type: "Random",
 		ability: "Hidden Possible",
-		moves: ["Transform", "Flying Press"],
+		moves: ["Transform"],
 		additional_moves: [],
 	},
 	{
