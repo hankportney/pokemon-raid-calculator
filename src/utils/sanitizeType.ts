@@ -2,8 +2,8 @@ import { IType, ITypeRelations } from "pokeapi-typescript";
 import { CleanDamageRelations, SanitizedType } from "../types";
 
 /**
- * A utility that reduces a PokeAPI `IMove` to useful display content.
- * @param move An `IMove` from PokeAPI.
+ * A utility that reduces a PokeAPI `IType` to useful display content.
+ * @param move An `IType` from PokeAPI.
  * @returns
  */
 const sanitizedType = ({
