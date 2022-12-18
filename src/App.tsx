@@ -3,7 +3,7 @@ import "./App.css";
 import SpeciesInput from "./components/SpeciesInput";
 import StarRatingInput from "./components/StarRatingInput";
 import TeraTypeInput from "./components/TeraTypeInput";
-import sixStar from "./data/sixStar";
+import sixStar from "./data/sixStar.json";
 import { StarRating, TeraType } from "./types";
 import getRecommendations from "./utils/getRecommendations";
 
