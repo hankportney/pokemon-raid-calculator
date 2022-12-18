@@ -35,6 +35,7 @@ function App() {
 						))}
 					</select>
 				</div>
+
 				<TeraTypeInput />
 				<button onClick={getStarRaidData}>Get the raid info</button>
 			</section>

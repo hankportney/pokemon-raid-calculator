@@ -1,3 +1,5 @@
+import "./TeraTypeInput.css";
+
 const teraTypes = [
 	"Normal",
 	"Fire",
@@ -21,9 +23,9 @@ const teraTypes = [
 
 const TeraTypeInput = () => {
 	return (
-		<fieldset>
+		<fieldset className="tera-type-input">
 			<legend>Tera type</legend>
-			<div className="tera-type-input">
+			<div className="radio-options-container">
 				{teraTypes.map((type) => (
 					<label
 						htmlFor={`tera_type_id_${type}`}
