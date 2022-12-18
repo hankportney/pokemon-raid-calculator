@@ -1,18 +1,11 @@
 import { Dispatch, FC, SetStateAction } from "react";
+import { RaidData } from "../types";
 import "./SpeciesInput.css";
 
-interface DataType {
-	name: string;
-	tera_type: string;
-	ability: string;
-	moves: string[];
-	additional_moves: string[];
-}
-
-interface SpeciesInputProps {
+export interface SpeciesInputProps {
 	value: string;
 	onChange: Dispatch<SetStateAction<string>>;
-	data: DataType[];
+	data: RaidData[];
 }
 
 const SpeciesInput: FC<SpeciesInputProps> = ({ value, onChange, data }) => {

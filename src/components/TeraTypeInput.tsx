@@ -1,25 +1,6 @@
 import { Dispatch, FC, SetStateAction } from "react";
+import { TeraType } from "../types";
 import "./TeraTypeInput.css";
-
-export type TeraType =
-	| "Normal"
-	| "Fire"
-	| "Water"
-	| "Grass"
-	| "Flying"
-	| "Fighting"
-	| "Poison"
-	| "Electric"
-	| "Ground"
-	| "Rock"
-	| "Psychic"
-	| "Ice"
-	| "Bug"
-	| "Ghost"
-	| "Steel"
-	| "Dragon"
-	| "Dark"
-	| "Fairy";
 
 const teraTypes: TeraType[] = [
 	"Normal",
@@ -42,7 +23,7 @@ const teraTypes: TeraType[] = [
 	"Fairy",
 ];
 
-interface TeraTypeInputProps {
+export interface TeraTypeInputProps {
 	value: TeraType | undefined;
 	onChange: Dispatch<SetStateAction<TeraType | undefined>>;
 }

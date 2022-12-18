@@ -1,9 +1,10 @@
 import { Dispatch, FC, SetStateAction } from "react";
+import { StarRating } from "../types";
 import "./StarRatingInput.css";
 
-interface StarRatingInputProps {
-	value: number;
-	onChange: Dispatch<SetStateAction<number>>;
+export interface StarRatingInputProps {
+	value: StarRating;
+	onChange: Dispatch<SetStateAction<StarRating>>;
 }
 
 const StarRatingInput: FC<StarRatingInputProps> = ({ value, onChange }) => {

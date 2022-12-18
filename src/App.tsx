@@ -1,13 +1,15 @@
-import PokeAPI, { IMove } from "pokeapi-typescript";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import SpeciesInput from "./components/SpeciesInput";
 import StarRatingInput from "./components/StarRatingInput";
-import TeraTypeInput, { TeraType } from "./components/TeraTypeInput";
+import TeraTypeInput from "./components/TeraTypeInput";
 import sixStar from "./data/sixStar";
+import { StarRating, TeraType } from "./types";
+import getRecommendations from "./utils/getRecommendations";
 
 function App() {
-	const [starRating, setStarRating] = useState<number>(6);
+	// Create states to track each input for a live refreshing form
+	const [starRating, setStarRating] = useState<StarRating>(6);
 	const [selectedSpecies, setSelectedSpecies] = useState<string>("Tauros");
 	const [teraType, setTeraType] = useState<TeraType | undefined>();
 
@@ -15,31 +17,15 @@ function App() {
 	// ...based on our selected star rating.
 	const relevantData = starRating === 6 ? sixStar : [];
 
-	const getTypes = async () => {
-		// Fetch selected pokemon (using selectedSpecies, in state) from PokeAPI
-		const { types } = await PokeAPI.Pokemon.fetch(selectedSpecies);
-
-		// Retrieve array of move names from raid info JSON.
-		const pokemonRaidDetails = relevantData.find(
-			(el) => el.name === selectedSpecies
-		);
-
-		// Use raid move list from JSON to fetch array of raid move info from PokeAPI
-		const movePromises = await Promise.allSettled(
-			pokemonRaidDetails?.moves.map((move) =>
-				PokeAPI.Move.fetch(move.replace(" ", "-")).then((result) => {
-					return result;
-				})
-			) || []
-		);
-
-		// Clean up the move promises to only include those that resolved successfully, and extract their data.
-		const sanitizedMoves = movePromises
-			.filter((el) => el.status === "fulfilled")
-			.map((el) => (el as PromiseFulfilledResult<IMove>).value);
-
-		console.log("Sanitized moves: ", sanitizedMoves);
-	};
+	// Refetch recommendations and update render state every time form inputs are changed.
+	useEffect(() => {
+		getRecommendations(
+			relevantData,
+			starRating,
+			selectedSpecies,
+			teraType
+		).then((result) => {});
+	}, [starRating, selectedSpecies, teraType, relevantData]);
 
 	return (
 		<>
@@ -52,7 +38,6 @@ function App() {
 				/>
 				<TeraTypeInput value={teraType} onChange={setTeraType} />
 			</section>
-			<button onClick={getTypes}>Click Here!</button>
 		</>
 	);
 }

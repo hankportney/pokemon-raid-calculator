@@ -1,4 +1,6 @@
-const sixStar = [
+import { RaidData } from "../types";
+
+const sixStar: RaidData[] = [
 	{
 		name: "Gengar",
 		tera_type: "Random",
