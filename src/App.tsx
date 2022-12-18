@@ -11,7 +11,7 @@ function App() {
 	// Create states to track each input for a live refreshing form
 	const [starRating, setStarRating] = useState<StarRating>(6);
 	const [selectedSpecies, setSelectedSpecies] = useState<string>("Tauros");
-	const [teraType, setTeraType] = useState<TeraType | undefined>();
+	const [teraType, setTeraType] = useState<TeraType>("Normal");
 
 	// Create a variable to dynamically retrieve the appropriate raid list data...
 	// ...based on our selected star rating.

@@ -15,12 +15,19 @@ const getRecommendations = async (
 	data: RaidData[],
 	starRating: StarRating,
 	selectedSpecies: string,
-	teraType: TeraType | undefined
+	teraType: TeraType
 ) => {
 	// Fetch selected pokemon (using selectedSpecies, in state) from PokeAPI
 	const { types, sprites } = await PokeAPI.Pokemon.fetch(selectedSpecies);
 
-	// GET ADDITIONAL TYPE DETAILS ------------------------------------------------------ //
+	// GET ADDITIONAL TERA TYPE DETAILS -------------------------------------------------- //
+
+	const teraTypeDetails = await PokeAPI.Type.fetch(teraType);
+	const sanitizedTeraTypeDetails = sanitizedType(teraTypeDetails);
+
+	// ---------------------------------------------------------------------------------- //
+
+	// GET ADDITIONAL BASE TYPES DETAILS ------------------------------------------------- //
 
 	// Use type list from pokemon to fetch array of raid move info from PokeAPI
 	const typePromises = await Promise.allSettled(
@@ -63,9 +70,14 @@ const getRecommendations = async (
 
 	// ---------------------------------------------------------------------------------- //
 
+	console.log("Sanitized tera type: ", sanitizedTeraTypeDetails);
 	console.log("Sanitized types: ", sanitizedTypes);
 	console.log("Sanitized moves: ", sanitizedMoves);
 	console.log("sprite front default ", sprites.front_default);
+
+	return {
+		types: sanitizedTypes,
+	};
 };
 
 export default getRecommendations;

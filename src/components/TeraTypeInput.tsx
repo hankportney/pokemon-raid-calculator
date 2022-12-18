@@ -24,8 +24,8 @@ const teraTypes: TeraType[] = [
 ];
 
 export interface TeraTypeInputProps {
-	value: TeraType | undefined;
-	onChange: Dispatch<SetStateAction<TeraType | undefined>>;
+	value: TeraType;
+	onChange: Dispatch<SetStateAction<TeraType>>;
 }
 
 const TeraTypeInput: FC<TeraTypeInputProps> = ({ value, onChange }) => {
