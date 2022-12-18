@@ -1,7 +1,9 @@
 import { useState } from "react";
 import "./App.css";
+import SpeciesInput from "./components/SpeciesInput";
+import StarRatingInput from "./components/StarRatingInput";
 import TeraTypeInput from "./components/TeraTypeInput";
-import sixStars from "./data/sixStar";
+import sixStar from "./data/sixStar";
 
 function App() {
 	const getStarRaidData = () => {};
@@ -13,32 +15,16 @@ function App() {
 			<header></header>
 
 			<section className="input-section">
-				<div className="input-container">
-					<label htmlFor="species" className="input-label">
-						Pokémon species
-					</label>
-					<select
-						name="species"
-						value={selectedSpecies}
-						onChange={(e) => {
-							console.log("e", e.currentTarget.value);
-							setSelectedSpecies(e.currentTarget.value);
-						}}
-					>
-						{sixStars.map((el) => (
-							<option
-								key={`select-option-${el.name}`}
-								value={el.name}
-							>
-								{el.name}
-							</option>
-						))}
-					</select>
-				</div>
-
+				<StarRatingInput />
+				<SpeciesInput
+					value={selectedSpecies}
+					onChange={setSelectedSpecies}
+					data={sixStar}
+				/>
 				<TeraTypeInput />
 				<button onClick={getStarRaidData}>Get the raid info</button>
 			</section>
+			<section>hello</section>
 		</>
 	);
 }
