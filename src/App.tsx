@@ -1,20 +1,40 @@
+import PokeAPI from "pokeapi-typescript";
 import { useState } from "react";
 import "./App.css";
 import SpeciesInput from "./components/SpeciesInput";
 import StarRatingInput from "./components/StarRatingInput";
 import TeraTypeInput, { TeraType } from "./components/TeraTypeInput";
 import sixStar from "./data/sixStar";
-import PokeAPI from "pokeapi-typescript";
 
 function App() {
 	const [starRating, setStarRating] = useState<number>(6);
 	const [selectedSpecies, setSelectedSpecies] = useState<string>("Tauros");
 	const [teraType, setTeraType] = useState<TeraType | undefined>();
+
+	// Create a variable to dynamically retrieve the appropriate raid list data...
+	// ...based on our selected star rating.
+	const relevantData = starRating === 6 ? sixStar : [];
+
 	const getTypes = async () => {
-		const result = await PokeAPI.Pokemon.fetch(selectedSpecies);
-		alert(JSON.stringify(result.types));
-		//generate weaknesses and strengths of terra type
-	}
+		// Fetch selected pokemon (using selectedSpecies, in state) from PokeAPI
+		const { types } = await PokeAPI.Pokemon.fetch(selectedSpecies);
+
+		// Retrieve array of move names from raid info JSON.
+		const pokemonRaidDetails = relevantData.find(
+			(el) => el.name === selectedSpecies
+		);
+
+		// Use raid move list from JSON to fetch array of raid move info from PokeAPI
+		const moves = await Promise.all(
+			pokemonRaidDetails?.moves.map((move) =>
+				PokeAPI.Move.fetch(move.replace(" ", "-")).then((result) => {
+					return result;
+				})
+			) || []
+		);
+
+		console.log("Resolved moves: ", moves);
+	};
 
 	return (
 		<>
@@ -23,7 +43,7 @@ function App() {
 				<SpeciesInput
 					value={selectedSpecies}
 					onChange={setSelectedSpecies}
-					data={starRating === 6 ? sixStar : []}
+					data={relevantData}
 				/>
 				<TeraTypeInput value={teraType} onChange={setTeraType} />
 			</section>

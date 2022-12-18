@@ -38,7 +38,7 @@ const sixStar = [
 		name: "Ditto",
 		tera_type: "Random",
 		ability: "Hidden Possible",
-		moves: ["Transform"],
+		moves: ["Transform", "Flying Press"],
 		additional_moves: [],
 	},
 	{
