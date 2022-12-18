@@ -56,3 +56,18 @@ export type SanitizedMove = {
 	target: IMoveTarget["name"];
 	type: IType["name"];
 };
+
+export interface CleanDamageRelations {
+	double_damage_from: IType["name"][];
+	double_damage_to: IType["name"][];
+	half_damage_from: IType["name"][];
+	half_damage_to: IType["name"][];
+	no_damage_from: IType["name"][];
+	no_damage_to: IType["name"][];
+}
+
+export interface SanitizedType {
+	damage_relations: CleanDamageRelations;
+	damage_class: IMove["damage_class"]["name"];
+	name: IType["name"];
+}

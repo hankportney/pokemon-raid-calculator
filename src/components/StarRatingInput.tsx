@@ -2,6 +2,8 @@ import { Dispatch, FC, SetStateAction } from "react";
 import { StarRating } from "../types";
 import "./StarRatingInput.css";
 
+// https://dev.to/grahamthedev/5-star-rating-system-actually-accessible-no-js-no-wai-aria-3idl
+
 export interface StarRatingInputProps {
 	value: StarRating;
 	onChange: Dispatch<SetStateAction<StarRating>>;
