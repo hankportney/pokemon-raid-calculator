@@ -42,23 +42,25 @@ const PokemonRenderCard: FC<PokemonRenderCardProps> = ({ pokemon }) => {
 						<th>Type</th>
 						<th>Power</th>
 						<th>Accuracy</th>
-						<th>PP</th>
 					</tr>
 				</thead>
 				<tbody>
 					{pokemon.moves.map((move) => (
-						<tr>
+						<tr key={`Raid_pokemon_move_${move.name}`}>
 							<td>{move.name}</td>
 							<td>
-								<img
-									src={`/typeBadges/${move.type}.png`}
-									alt={`Pokemon move type: ${move.type}`}
-									className="move-type-badge"
-								/>
+								{move.type != null ? (
+									<img
+										src={`/typeBadges/${move.type}.png`}
+										alt={`Pokemon move type: ${move.type}`}
+										className="move-type-badge"
+									/>
+								) : (
+									"--"
+								)}
 							</td>
-							<td>{move.power}</td>
-							<td>{move.accuracy}</td>
-							<td>{move.pp}</td>
+							<td>{move.power || "--"}</td>
+							<td>{move.accuracy || "--"}</td>
 						</tr>
 					))}
 				</tbody>

@@ -50,7 +50,7 @@ const getRecommendations = async (
 
 	// ---------------------------------------------------------------------------------- //
 
-	// GET ADDITIONAL MOVE DETAILS ------------------------------------------------------ //
+	// GET MOVE DETAILS ----------------------------------------------------------------- //
 
 	// Retrieve array of move names from raid info JSON.
 	const pokemonRaidDetails = data.find((el) => el.name === selectedSpecies);
@@ -58,17 +58,22 @@ const getRecommendations = async (
 	// Use raid move list from JSON to fetch array of raid move info from PokeAPI
 	const movePromises = await Promise.allSettled(
 		pokemonRaidDetails?.moves.map((move) =>
-			PokeAPI.Move.fetch(move.replace(" ", "-")).then((result) => {
-				return { ...result, name: move };
-			})
+			PokeAPI.Move.fetch(move.replace(" ", "-"))
+				.then((result) => {
+					return { ...result, name: move };
+				})
+				.catch(() => {
+					// If move fails to resolve from API (aka API doesn't have it)...
+					// Return only the name.
+					return { name: move };
+				})
 		) || []
 	);
 
-	// Clean up the move promises to only include those that resolved successfully...
-	// ...then extract their data and sanitize it.
-	const sanitizedMoves = movePromises
-		.filter((el) => el.status === "fulfilled")
-		.map((el) => sanitizeMove((el as PromiseFulfilledResult<IMove>).value));
+	// Convert resolved promises into array of data, and sanitize each entry.
+	const sanitizedMoves = movePromises.map((el) =>
+		sanitizeMove((el as PromiseFulfilledResult<IMove>).value)
+	);
 
 	// ---------------------------------------------------------------------------------- //
 

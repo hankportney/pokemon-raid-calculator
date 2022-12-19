@@ -41,21 +41,21 @@ export type TeraType =
 	| "Fairy";
 
 export type SanitizedMove = {
-	accuracy: IMove["accuracy"];
-	damage_class: IMoveDamageClass["name"];
-	effect_chance: IMove["effect_chance"];
-	effect_entry: IVerboseEffect["short_effect"];
-	meta: IMoveMetaData;
+	accuracy: IMove["accuracy"] | null;
+	damage_class: IMoveDamageClass["name"] | null;
+	effect_chance: IMove["effect_chance"] | null;
+	effect_entry: IVerboseEffect["short_effect"] | null;
+	meta: IMoveMetaData | null;
 	name: string;
-	power: IMove["power"];
-	pp: IMove["pp"];
-	priority: IMove["priority"];
+	power: IMove["power"] | null;
+	pp: IMove["pp"] | null;
+	priority: IMove["priority"] | null;
 	stat_changes: {
 		change: IMoveStatChange["change"];
 		stat: IMoveStatChange["stat"]["name"];
 	}[];
-	target: IMoveTarget["name"];
-	type: IType["name"];
+	target: IMoveTarget["name"] | null;
+	type: IType["name"] | null;
 };
 
 export interface CleanDamageRelations {
