@@ -1,0 +1,25 @@
+.wrapper {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	flex-wrap: wrap;
+	padding: 1.25rem;
+	gap: 3rem;
+}
+
+.input-section,
+.results-section {
+	display: flex;
+	flex-direction: column;
+	align-self: stretch;
+	align-items: center;
+	gap: 1rem;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+.input-section > *,
+.results-section > * {
+	max-width: 25rem;
+	width: 100%;
+}
