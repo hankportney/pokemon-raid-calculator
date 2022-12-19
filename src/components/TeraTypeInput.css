@@ -1,6 +1,6 @@
 fieldset.tera-type-input {
-	webkit-appearance: none;
-	moz-appearance: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
 	appearance: none;
 	display: flex;
 	flex-direction: column;
@@ -40,8 +40,8 @@ fieldset.tera-type-input:focus-within {
 }
 
 .radio-options-container label input[type="radio"] {
-	webkit-appearance: none;
-	moz-appearance: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
 	appearance: none;
 	/* For iOS < 15 to remove gradient background */
 	background-color: #fff;

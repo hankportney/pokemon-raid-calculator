@@ -32,13 +32,7 @@ function App() {
 
 	return (
 		<>
-			<div
-				style={{
-					display: "flex",
-					flexDirection: "row",
-					justifyContent: "center",
-				}}
-			>
+			<div className="wrapper">
 				<section className="input-section">
 					<StarRatingInput
 						value={starRating}
@@ -51,9 +45,11 @@ function App() {
 					/>
 					<TeraTypeInput value={teraType} onChange={setTeraType} />
 				</section>
-				{raidPokemon != undefined && (
-					<PokemonRenderCard pokemon={raidPokemon} />
-				)}
+				<section className="results-section">
+					{raidPokemon != undefined && (
+						<PokemonRenderCard pokemon={raidPokemon} />
+					)}
+				</section>
 			</div>
 		</>
 	);
