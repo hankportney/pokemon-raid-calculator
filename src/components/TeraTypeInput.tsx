@@ -50,7 +50,7 @@ const TeraTypeInput: FC<TeraTypeInputProps> = ({ value, onChange }) => {
 						/>
 						<span>
 							<img
-								src={`teraTypeImages/${type.toLowerCase()}.png`}
+								src={`/teraTypeImages/${type.toLowerCase()}.png`}
 								alt={`Tera Type: ${type}`}
 							/>
 							{type}

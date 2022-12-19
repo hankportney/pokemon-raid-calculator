@@ -13,7 +13,7 @@ const MoveRow: FC<{ move: SanitizedMove }> = ({ move }) => {
 			<td>
 				{move.type != null ? (
 					<img
-						src={`typeBadges/${move.type}.png`}
+						src={`/typeBadges/${move.type}.png`}
 						alt={`Pokemon move type: ${move.type}`}
 						className="move-type-badge"
 					/>
@@ -36,14 +36,14 @@ const PokemonRenderCard: FC<PokemonRenderCardProps> = ({ pokemon }) => {
 				<span className="badge-group">
 					{pokemon.base_types.map((type) => (
 						<img
-							src={`typeBadges/${type.name.toLowerCase()}.png`}
+							src={`/typeBadges/${type.name.toLowerCase()}.png`}
 							alt={`Pokemon type: ${type.name}`}
 							className="type-badge"
 						/>
 					))}
 					<span className="divider"></span>
 					<img
-						src={`typeBadges/${pokemon.tera_type.name.toLowerCase()}.png`}
+						src={`/typeBadges/${pokemon.tera_type.name.toLowerCase()}.png`}
 						alt={`Pokemon Tera type: ${pokemon.tera_type.name}`}
 						className="type-badge"
 					/>
