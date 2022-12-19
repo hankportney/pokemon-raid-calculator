@@ -79,4 +79,5 @@ export interface PokemonRenderDetails {
 	base_types: SanitizedType[];
 	tera_type: SanitizedType;
 	moves: SanitizedMove[];
+	additional_moves: SanitizedMove[];
 }

@@ -75,6 +75,25 @@ const getRecommendations = async (
 		sanitizeMove((el as PromiseFulfilledResult<IMove>).value)
 	);
 
+	const additionalMovePromises = await Promise.allSettled(
+		pokemonRaidDetails?.additional_moves.map((move) =>
+			PokeAPI.Move.fetch(move.replace(" ", "-"))
+				.then((result) => {
+					return { ...result, name: move };
+				})
+				.catch(() => {
+					// If move fails to resolve from API (aka API doesn't have it)...
+					// Return only the name.
+					return { name: move };
+				})
+		) || []
+	);
+
+	// Convert resolved promises into array of data, and sanitize each entry.
+	const sanitizedAdditionalMoves = additionalMovePromises.map((el) =>
+		sanitizeMove((el as PromiseFulfilledResult<IMove>).value)
+	);
+
 	// ---------------------------------------------------------------------------------- //
 
 	return {
@@ -84,6 +103,7 @@ const getRecommendations = async (
 			base_types: sanitizedTypes,
 			tera_type: sanitizedTeraType,
 			moves: sanitizedMoves,
+			additional_moves: sanitizedAdditionalMoves,
 		},
 	};
 };

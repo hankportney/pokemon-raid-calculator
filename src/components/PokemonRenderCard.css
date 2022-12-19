@@ -54,12 +54,28 @@
 	background-color: #d1d1d1;
 }
 
+.pokemon-card table.move-table {
+	border-collapse: collapse;
+}
+
+.pokemon-card .move-table tr {
+	position: relative;
+}
+
+.pokemon-card .move-table tr:hover td {
+	background-color: rgba(0, 0, 0, 0.05);
+	cursor: default;
+}
+
 .pokemon-card .move-table th {
 	text-align: left;
 	height: 2rem;
+	border: none;
 }
+
 .pokemon-card .move-table td {
 	height: 2rem;
+	border: none;
 }
 
 .pokemon-card .move-table td .move-type-badge {
@@ -69,4 +85,5 @@
 	margin-top: auto;
 	margin-bottom: auto;
 	vertical-align: middle;
+	margin-right: 0.5rem;
 }

@@ -1,10 +1,31 @@
 import { FC } from "react";
-import { PokemonRenderDetails } from "../types";
+import { PokemonRenderDetails, SanitizedMove } from "../types";
 import "./PokemonRenderCard.css";
 
 interface PokemonRenderCardProps {
 	pokemon: PokemonRenderDetails;
 }
+
+const MoveRow: FC<{ move: SanitizedMove }> = ({ move }) => {
+	return (
+		<tr>
+			<td>{move.name}</td>
+			<td>
+				{move.type != null ? (
+					<img
+						src={`/typeBadges/${move.type}.png`}
+						alt={`Pokemon move type: ${move.type}`}
+						className="move-type-badge"
+					/>
+				) : (
+					"--"
+				)}
+			</td>
+			<td>{move.power || "--"}</td>
+			<td>{move.accuracy || "--"}</td>
+		</tr>
+	);
+};
 
 const PokemonRenderCard: FC<PokemonRenderCardProps> = ({ pokemon }) => {
 	console.log(pokemon.base_types);
@@ -38,7 +59,7 @@ const PokemonRenderCard: FC<PokemonRenderCardProps> = ({ pokemon }) => {
 			<table className="move-table">
 				<thead>
 					<tr>
-						<th>Move</th>
+						<th>Base moves</th>
 						<th>Type</th>
 						<th>Power</th>
 						<th>Accuracy</th>
@@ -46,22 +67,19 @@ const PokemonRenderCard: FC<PokemonRenderCardProps> = ({ pokemon }) => {
 				</thead>
 				<tbody>
 					{pokemon.moves.map((move) => (
-						<tr key={`Raid_pokemon_move_${move.name}`}>
-							<td>{move.name}</td>
-							<td>
-								{move.type != null ? (
-									<img
-										src={`/typeBadges/${move.type}.png`}
-										alt={`Pokemon move type: ${move.type}`}
-										className="move-type-badge"
-									/>
-								) : (
-									"--"
-								)}
-							</td>
-							<td>{move.power || "--"}</td>
-							<td>{move.accuracy || "--"}</td>
-						</tr>
+						<MoveRow
+							key={`Raid_pokemon_move_${move.name}`}
+							move={move}
+						/>
+					))}
+					<tr>
+						<th>Additional moves</th>
+					</tr>
+					{pokemon.additional_moves.map((move) => (
+						<MoveRow
+							key={`Raid_pokemon_additional_move_${move.name}`}
+							move={move}
+						/>
 					))}
 				</tbody>
 			</table>
